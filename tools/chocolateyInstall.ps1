@@ -10,8 +10,8 @@ $serviceDataDirectory = "$serviceInstallationDirectory\data"
 
 $packageParameters = $env:chocolateyPackageParameters
 if (-not ($packageParameters)) {
-  $packageParameters = ""
-  Write-Debug "No Package Parameters Passed in"
+  $packageParameters = "agent -ui"
+  Write-Debug "No Package Parameters Passed in - assuming agent mode with UI"
 }
 
 # Consul related variables
@@ -70,7 +70,7 @@ if ($service) {
 
 Write-Host "Installing service: $serviceName"
 # Install the service
-& $wrapperExe install $serviceName $(Join-Path $toolsPath "consul.exe") "agent -ui -config-dir=$serviceConfigDirectory -data-dir=$serviceDataDirectory $packageParameters" | Out-Null
+& $wrapperExe install $serviceName $(Join-Path $toolsPath "consul.exe") "$packageParameters -config-dir=$serviceConfigDirectory -data-dir=$serviceDataDirectory" | Out-Null
 & $wrapperExe set $serviceName AppEnvironmentExtra GOMAXPROCS=$env:NUMBER_OF_PROCESSORS | Out-Null
 & $wrapperExe set $serviceName ObjectName NetworkService | Out-Null
 & $wrapperExe set $serviceName AppStdout "$serviceLogDirectory\consul-output.log" | Out-Null

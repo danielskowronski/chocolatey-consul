@@ -17,8 +17,8 @@ Uses NSSM as the service wrapper. More info at: https://nssm.cc/
 
 #### Package Parameters
 The package parameters can be set - https://www.consul.io/docs/agent/options.html
-These parameters can be passed to the installer with the use of `-params`.
-For example: `-params '-config-file="%PROGRAMDATA%\consul\dsc-config\default.json"'`.
+These parameters can be passed to the installer with the use of `-params`. If omitted they will be set to `agent -ui`
+For example: `-params 'agent -ui -config-file="%PROGRAMDATA%\consul\dsc-config\default.json"'` or `-params 'server -ui'`.
     </description>
     <summary>Consul is a tool for service discovery, monitoring and configuration.</summary>
     <iconUrl>https://cdn.rawgit.com/calvn/chocolatey-consul/master/icons/consul.png</iconUrl>
